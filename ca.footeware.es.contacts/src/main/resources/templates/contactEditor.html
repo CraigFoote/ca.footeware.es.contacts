@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Contact Editor</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css" />
+<script type="text/javascript" src="/js/main.js"></script>
+</head>
+<body>
+	<header>
+		<h1>Contact Editor</h1>
+	</header>
+	<section>
+		<form action="#" th:action="@{/contacts/}" th:object="${contact}"
+			id="contactForm" method="post">
+			<div class="table">
+				<div class="row">
+					<div class="cell">First&nbsp;Name</div>
+					<div class="cell">
+						<input type="text" size="35" th:field="*{firstName}" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="cell">Last&nbsp;Name</div>
+					<div class="cell">
+						<input type="text" size="35" th:field="*{lastName}" />
+					</div>
+				</div>
+				<div class="row">
+					<div class="cell">Email</div>
+					<div class="cell">
+						<input type="text" size="35" th:field="*{email}" />
+					</div>
+				</div>
+			</div>
+			<div>
+				<img th:src="@{/images/db.png}" alt="save" title="save"
+					class="small" onclick="saveContact()"
+					onmouseover="this.src='/images/db_over.png'"
+					onmouseout="this.src='/images/db.png'" /> <img
+					th:src="@{/images/cancel.png}" alt="cancel" title="cancel"
+					class="small" onclick="cancelAddContact()"
+					onmouseover="this.src='/images/cancel_over.png'"
+					onmouseout="this.src='/images/cancel.png'" />
+			</div>
+			<input th:if="${contact.id}" type="hidden" th:field="*{id}"/>
+		</form>
+	</section>
+</body>
+</html>

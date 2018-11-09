@@ -1,0 +1,92 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: "aud";
+	src: url(../fonts/Audhistine.ttf) format("truetype");
+}
+
+@font-face {
+	font-family: "Borders";
+	src: url(../fonts/Borders.ttf) format("truetype");
+}
+
+body {
+	font-family: Borders;
+	color: #88C0D0;
+	font-size: 2.3em;
+	background-color: #434C5E;
+}
+
+h1 {
+	font-family: aud;
+	text-align: center;
+	color: #EBCB8B;
+	font-size: 0.8em;
+	text-shadow: 2px 2px 4px #000000;
+}
+
+section {
+	background-color: #3B4252;
+	border: 1px solid black;
+	width: 60%; text-align : center; margin : 20px auto 20px auto;
+	padding: 10px;
+	margin: 20px auto 20px auto;
+	text-align: center;
+}
+
+li {
+	border: 1px solid #434C5E;
+	border-radius: 5px;
+	margin: 10px;
+	padding: 10px;
+}
+
+li>div {
+	text-align: left;
+}
+
+div.imageWrapper {
+	float: right;
+	position: relative;
+	top: -65px;
+}
+
+.small {
+	width: 40px;
+	height: 40px;
+}
+
+img {
+	padding: 10px;
+}
+
+img:hover {
+	cursor: pointer;
+}
+
+a {
+	outline: none;
+}
+
+.rightShim {
+	margin-left: 100px;
+}
+
+div.table {
+	display: table;
+	width: 100%
+}
+
+div.row {
+	display: table-row;
+}
+
+div.cell {
+	display: table-cell;
+}
+
+input {
+	font-size: 1em;
+	background-color: #8FBCBB;
+	margin: 5px;
+}

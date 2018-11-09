@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Contacts</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css" />
+<script type="text/javascript" src="/js/main.js"></script>
+</head>
+<body>
+	<header>
+		<h1>Contacts</h1>
+	</header>
+	<section>
+		<ol>
+			<li th:each="contact : ${contacts}">
+				<div>
+					[[${contact.firstName}]]&nbsp;[[${contact.lastName}]]<br />[[${contact.email}]]
+				</div>
+				<div class="right imageWrapper">
+					<img th:src="@{/images/edit.png}" alt="edit" title="edit"
+						class="small" th:id="${contact.id}"
+						onmouseover="this.src='/images/edit_over.png'"
+						onmouseout="this.src='/images/edit.png'"
+						onclick="editContact(this.id)" />&nbsp;<img
+						th:src="@{/images/delete.png}" alt="delete" title="delete"
+						class="small" th:id="${contact.id}"
+						onmouseover="this.src='/images/delete_over.png'"
+						onmouseout="this.src='/images/delete.png'"
+						onclick="deleteContact(this.id)" />
+				</div>
+			</li>
+		</ol>
+		<a th:href="@{/contacts/add}"><img th:src="@{/images/add.png}"
+			alt="add" title="add" class="small rightShim"
+			onmouseover="this.src='/images/add_over.png'"
+			onmouseout="this.src='/images/add.png'" /></a>
+	</section>
+</body>
+</html>

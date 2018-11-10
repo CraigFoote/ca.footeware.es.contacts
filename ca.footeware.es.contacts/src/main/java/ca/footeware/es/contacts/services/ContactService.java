@@ -20,7 +20,7 @@ import ca.footeware.es.contacts.repositories.ContactRepository;
 public class ContactService {
 
 	private ContactRepository repository;
-	
+
 	@Autowired
 	public ContactService(ContactRepository repository) {
 		this.repository = repository;
@@ -28,13 +28,15 @@ public class ContactService {
 
 	public Contact addContact(Contact newContact) {
 		Assert.notNull(newContact, "Provided contact cannot be null.");
-		Contact saved = repository.save(newContact);
-		return saved;
+		Optional<Contact> byEmail = repository.findByEmail(newContact.getEmail());
+		if (byEmail.isPresent()) {
+			throw new RuntimeException("Provided contact's email address already exists.");
+		}
+		return repository.save(newContact);
 	}
 
 	public Iterable<Contact> getContacts() {
-		Iterable<Contact> all = repository.findAll();
-		return all;
+		return repository.findAll();
 	}
 
 	public void delete(String id) {

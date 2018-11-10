@@ -64,7 +64,11 @@ public class ContactController {
 	@PutMapping("/contacts/{id}")
 	public String editContact(@PathVariable String id, Model model) {
 		Optional<Contact> contact = service.getById(id);
-		model.addAttribute("contact", contact.get());
+		if (contact.isPresent()) {
+			model.addAttribute("contact", contact.get());
+		} else {
+			throw new RuntimeException("Contact not found.");
+		}
 		return "contactEditor";
 	}
 

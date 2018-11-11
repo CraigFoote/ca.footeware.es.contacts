@@ -7,8 +7,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 /**
+ * The data object.
+ * 
  * @author footeware.ca
- *
  */
 @Document(indexName = "contacts", type = "doc")
 public class Contact {

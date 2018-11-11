@@ -10,8 +10,9 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 import ca.footeware.es.contacts.models.Contact;
 
 /**
+ * A repository for {@link Contact} instances.
+ * 
  * @author footeware.ca
- *
  */
 public interface ContactRepository extends ElasticsearchRepository<Contact, String> {
 

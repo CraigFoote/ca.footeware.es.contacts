@@ -38,7 +38,7 @@ public class ContactService {
 	 * @param newContact {@link Contact}
 	 * @return {@link Contact}
 	 */
-	public Contact addContact(Contact newContact) {
+	public Contact saveContact(Contact newContact) {
 		Assert.notNull(newContact, "Provided contact cannot be null.");
 		Optional<Contact> byEmail = repository.findByEmail(newContact.getEmail());
 		if (byEmail.isPresent()) {

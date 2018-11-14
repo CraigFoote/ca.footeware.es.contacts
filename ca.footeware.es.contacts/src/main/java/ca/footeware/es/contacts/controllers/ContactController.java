@@ -75,7 +75,7 @@ public class ContactController {
 		Assert.hasText(contact.getFirstName(), "First name cannot be empty.");
 		Assert.hasText(contact.getLastName(), "Last name cannot be empty.");
 		Assert.hasText(contact.getEmail(), "Email cannot be empty.");
-		Contact addedContact = service.addContact(contact);
+		Contact addedContact = service.saveContact(contact);
 		Assert.notNull(addedContact, "Contact was not added.");
 		return getContacts(model);
 	}

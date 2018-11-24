@@ -5,6 +5,8 @@ package ca.footeware.es.contacts.controllers;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,8 +72,8 @@ public class ContactController {
 	 * @param model   {@link Model}
 	 * @return {@link String} name of view
 	 */
-	@PostMapping("/contacts/")
-	public String saveContact(@ModelAttribute("contact") Contact contact, Model model) {
+	@PostMapping("/contacts")
+	public String saveContact(@Valid @ModelAttribute("contact") Contact contact, Model model) {
 		Assert.hasText(contact.getFirstName(), "First name cannot be empty.");
 		Assert.hasText(contact.getLastName(), "Last name cannot be empty.");
 		Assert.hasText(contact.getEmail(), "Email cannot be empty.");

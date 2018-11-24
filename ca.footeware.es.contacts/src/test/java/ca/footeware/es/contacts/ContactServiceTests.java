@@ -38,9 +38,8 @@ class ContactServiceTests {
 	@Autowired
 	private ContactRepository repository;
 
-	private Contact contact = new Contact();
-
 	private Contact getContact() {
+		Contact contact = new Contact();
 		contact.setFirstName("Craig");
 		contact.setLastName("Foote");
 		contact.setEmail("CraigFoote@gmail.com");
@@ -73,7 +72,7 @@ class ContactServiceTests {
 	 */
 	@Test
 	void testSaveContact() {
-		contact = service.saveContact(getContact());
+		Contact contact = service.saveContact(getContact());
 		assertNotSame(null, contact.getId(), "Saved contact should have non-null id.");
 	}
 
@@ -83,7 +82,6 @@ class ContactServiceTests {
 	 */
 	@Test
 	void testGetContacts() {
-		contact = service.saveContact(getContact());
 		Iterable<Contact> contacts = service.getContacts();
 		int i = 0;
 		Iterator<Contact> iterator = contacts.iterator();
@@ -100,8 +98,8 @@ class ContactServiceTests {
 	 */
 	@Test
 	void testDelete() {
-		Contact saveContact = service.saveContact(getContact());
-		String id = saveContact.getId();
+		Contact contact = service.saveContact(getContact());
+		String id = contact.getId();
 		service.delete(id);
 		Optional<Contact> byId = service.getById(id);
 		assertFalse(byId.isPresent());
@@ -113,7 +111,7 @@ class ContactServiceTests {
 	 */
 	@Test
 	void testGetById() {
-		contact = service.saveContact(getContact());
+		Contact contact = service.saveContact(getContact());
 		String id = contact.getId();
 		Optional<Contact> optional = service.getById(id);
 		assertTrue(optional.isPresent());

@@ -19,6 +19,8 @@ public class Contact {
 	private String firstName;
 	private String lastName;
 	private String email;
+	
+	public Contact() {}
 
 	/**
 	 * @return the firstName

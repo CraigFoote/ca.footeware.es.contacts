@@ -19,8 +19,13 @@ public class Contact {
 	private String firstName;
 	private String lastName;
 	private String email;
-	
-	public Contact() {}
+
+	/**
+	 * Default constructor.
+	 */
+	public Contact() {
+		// nothing to do
+	}
 
 	/**
 	 * @return the firstName

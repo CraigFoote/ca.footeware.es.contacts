@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import ca.footeware.es.contacts.exceptions.ContactException;
 import ca.footeware.es.contacts.models.Contact;
 import ca.footeware.es.contacts.repositories.ContactRepository;
 import ca.footeware.es.contacts.services.ContactService;
@@ -69,9 +70,11 @@ class ContactServiceTests {
 	/**
 	 * Test method for
 	 * {@link ca.footeware.es.contacts.services.ContactService#saveContact(ca.footeware.es.contacts.models.Contact)}.
+	 * 
+	 * @throws ContactException
 	 */
 	@Test
-	void testSaveContact() {
+	void testSaveContact() throws ContactException {
 		Contact contact = service.saveContact(getContact());
 		assertNotSame(null, contact.getId(), "Saved contact should have non-null id.");
 	}
@@ -95,9 +98,11 @@ class ContactServiceTests {
 	/**
 	 * Test method for
 	 * {@link ca.footeware.es.contacts.services.ContactService#delete(java.lang.String)}.
+	 * 
+	 * @throws ContactException
 	 */
 	@Test
-	void testDelete() {
+	void testDelete() throws ContactException {
 		Contact contact = service.saveContact(getContact());
 		String id = contact.getId();
 		service.delete(id);
@@ -108,9 +113,11 @@ class ContactServiceTests {
 	/**
 	 * Test method for
 	 * {@link ca.footeware.es.contacts.services.ContactService#getById(java.lang.String)}.
+	 * 
+	 * @throws ContactException
 	 */
 	@Test
-	void testGetById() {
+	void testGetById() throws ContactException {
 		Contact contact = service.saveContact(getContact());
 		String id = contact.getId();
 		Optional<Contact> optional = service.getById(id);

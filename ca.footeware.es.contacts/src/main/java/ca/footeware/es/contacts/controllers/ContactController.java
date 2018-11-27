@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import ca.footeware.es.contacts.exceptions.ContactException;
+import ca.footeware.es.contacts.exceptions.ContactNotFoundException;
 import ca.footeware.es.contacts.models.Contact;
 import ca.footeware.es.contacts.services.ContactService;
 
@@ -71,9 +73,10 @@ public class ContactController {
 	 * @param contact {@link Contact}
 	 * @param model   {@link Model}
 	 * @return {@link String} name of view
+	 * @throws ContactException 
 	 */
 	@PostMapping("/contacts")
-	public String saveContact(@Valid @ModelAttribute("contact") Contact contact, Model model) {
+	public String saveContact(@Valid @ModelAttribute("contact") Contact contact, Model model) throws ContactException {
 		Assert.hasText(contact.getFirstName(), "First name cannot be empty.");
 		Assert.hasText(contact.getLastName(), "Last name cannot be empty.");
 		Assert.hasText(contact.getEmail(), "Email cannot be empty.");
@@ -101,14 +104,15 @@ public class ContactController {
 	 * @param id    {@link String} id of contact to edit
 	 * @param model {@link Model}
 	 * @return {@link String} name of view
+	 * @throws ContactNotFoundException 
 	 */
 	@PutMapping("/contacts/{id}")
-	public String editContact(@PathVariable String id, Model model) {
+	public String editContact(@PathVariable String id, Model model) throws ContactNotFoundException {
 		Optional<Contact> contact = service.getById(id);
 		if (contact.isPresent()) {
 			model.addAttribute("contact", contact.get());
 		} else {
-			throw new RuntimeException("Contact not found.");
+			throw new ContactNotFoundException("Contact not found.");
 		}
 		return "contactEditor";
 	}

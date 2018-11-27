@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import ca.footeware.es.contacts.exceptions.ContactException;
 import ca.footeware.es.contacts.models.Contact;
 import ca.footeware.es.contacts.repositories.ContactRepository;
 
@@ -37,12 +38,13 @@ public class ContactService {
 	 * 
 	 * @param newContact {@link Contact}
 	 * @return {@link Contact}
+	 * @throws ContactException 
 	 */
-	public Contact saveContact(Contact newContact) {
+	public Contact saveContact(Contact newContact) throws ContactException {
 		Assert.notNull(newContact, "Provided contact cannot be null.");
 		Optional<Contact> byEmail = repository.findByEmail(newContact.getEmail());
 		if (byEmail.isPresent()) {
-			throw new RuntimeException("Provided contact's email address already exists.");
+			throw new ContactException("Provided contact's email address already exists.");
 		}
 		return repository.save(newContact);
 	}

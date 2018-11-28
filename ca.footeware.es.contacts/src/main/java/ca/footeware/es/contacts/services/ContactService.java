@@ -38,7 +38,7 @@ public class ContactService {
 	 * 
 	 * @param newContact {@link Contact}
 	 * @return {@link Contact}
-	 * @throws ContactException 
+	 * @throws ContactException
 	 */
 	public Contact saveContact(Contact newContact) throws ContactException {
 		Assert.notNull(newContact, "Provided contact cannot be null.");
@@ -52,7 +52,7 @@ public class ContactService {
 	/**
 	 * Get all contacts.
 	 * 
-	 * @return {@link Iterable}<{@link Contact}
+	 * @return {@link Iterable} of type {@link Contact}
 	 */
 	public Iterable<Contact> getContacts() {
 		return repository.findAll();
@@ -71,7 +71,7 @@ public class ContactService {
 	 * Get a contact by its id.
 	 * 
 	 * @param id {@link String}
-	 * @return {@link Optional}<{@link Contact}>
+	 * @return {@link Optional} of type {@link Contact}
 	 */
 	public Optional<Contact> getById(String id) {
 		return repository.findById(id);

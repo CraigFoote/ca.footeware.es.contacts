@@ -20,7 +20,7 @@ public interface ContactRepository extends ElasticsearchRepository<Contact, Stri
 	 * Find a contact by its email.
 	 * 
 	 * @param email {@link String}
-	 * @return {@link Optional}<{@link Contact}>
+	 * @return {@link Optional} of type {@link Contact}
 	 */
 	Optional<Contact> findByEmail(String email);
 }

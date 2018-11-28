@@ -82,9 +82,12 @@ class ContactServiceTests {
 	/**
 	 * Test method for
 	 * {@link ca.footeware.es.contacts.services.ContactService#getContacts()}.
+	 * 
+	 * @throws ContactException
 	 */
 	@Test
-	void testGetContacts() {
+	void testGetContacts() throws ContactException {
+		service.saveContact(getContact());
 		Iterable<Contact> contacts = service.getContacts();
 		int i = 0;
 		Iterator<Contact> iterator = contacts.iterator();

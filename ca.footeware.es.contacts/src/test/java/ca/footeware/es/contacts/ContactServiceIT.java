@@ -31,7 +31,7 @@ import ca.footeware.es.contacts.services.ContactService;
  */
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class ContactServiceTests {
+class ContactServiceIT {
 
 	@Autowired
 	private ContactService service;

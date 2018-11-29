@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import ca.footeware.es.contacts.exceptions.ContactException;
 import ca.footeware.es.contacts.exceptions.ContactNotFoundException;
 import ca.footeware.es.contacts.models.Contact;
-import ca.footeware.es.contacts.models.ContactDTO;
 import ca.footeware.es.contacts.services.ContactService;
 
 /**
@@ -64,31 +63,23 @@ public class ContactController {
 	 */
 	@GetMapping("/contacts/add")
 	public String addContact(Model model) {
-		model.addAttribute("contact", new ContactDTO());
+		model.addAttribute("contact", new Contact());
 		return "contactEditor";
 	}
 
 	/**
 	 * Save a contact
 	 * 
-	 * @param contact {@link ContactDTO}
+	 * @param contact {@link Contact}
 	 * @param model   {@link Model}
 	 * @return {@link String} name of view
 	 * @throws ContactException
 	 */
 	@PostMapping("/contacts")
-	public String saveContact(@Valid @ModelAttribute("contact") ContactDTO contactDTO, Model model)
-			throws ContactException {
-		Assert.hasText(contactDTO.getFirstName(), "First name cannot be empty.");
-		Assert.hasText(contactDTO.getLastName(), "Last name cannot be empty.");
-		Assert.hasText(contactDTO.getEmail(), "Email cannot be empty.");
-
-		Contact contact = new Contact();
-		contact.setFirstName(contactDTO.getFirstName());
-		contact.setLastName(contactDTO.getLastName());
-		contact.setEmail(contactDTO.getEmail());
-		contact.setId(contactDTO.getId());
-
+	public String saveContact(@Valid @ModelAttribute("contact") Contact contact, Model model) throws ContactException {
+		Assert.hasText(contact.getFirstName(), "First name cannot be empty.");
+		Assert.hasText(contact.getLastName(), "Last name cannot be empty.");
+		Assert.hasText(contact.getEmail(), "Email cannot be empty.");
 		Contact addedContact = service.saveContact(contact);
 		Assert.notNull(addedContact, "Contact was not added.");
 		return getContacts(model);

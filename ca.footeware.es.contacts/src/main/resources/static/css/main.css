@@ -10,6 +10,11 @@
 	src: url(../fonts/Borders.ttf) format("truetype");
 }
 
+@font-face {
+	font-family: "swing";
+	src: url(../fonts/swing.ttf) format("truetype");
+}
+
 body {
 	font-family: Borders;
 	color: #88C0D0;
@@ -28,7 +33,9 @@ h1 {
 section {
 	background-color: #3B4252;
 	border: 1px solid black;
-	width: 60%; text-align : center; margin : 20px auto 20px auto;
+	width: 60%;
+	text-align: center;
+	margin: 20px auto 20px auto;
 	padding: 10px;
 	margin: 20px auto 20px auto;
 	text-align: center;
@@ -89,8 +96,14 @@ input {
 	font-size: 1em;
 	background-color: #8FBCBB;
 	margin: 5px;
+	width: 90%;
 }
 
-footer{
+#errors {
+	color: red;
+	font-family: swing;
+}
+
+footer {
 	text-align: right;
 }

@@ -3,6 +3,20 @@ function cancelAddContact() {
 }
 
 function saveContact() {
+	var errors = "";
+	if (!document.getElementsByName("firstName").item(0).value.trim().length > 0) {
+		errors += "<li>First name cannot be empty.</li>";
+	}
+	if (!document.getElementsByName("lastName").item(0).value.trim().length > 0) {
+		errors += "<li>Last name cannot be empty.</li>";
+	}
+	if (!document.getElementsByName("email").item(0).value.trim().length > 0) {
+		errors += "<li>Email cannot be empty.</li>";
+	}
+	if (errors){
+		document.getElementById("errors").innerHTML = errors;
+		return;
+	}
 	document.getElementById("contactForm").submit();
 }
 

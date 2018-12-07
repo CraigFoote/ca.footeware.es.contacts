@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ca.footeware.es.contacts;
+package ca.footeware.es.contacts.tests.it;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -54,7 +54,7 @@ class ContactControllerIT {
 
 	/**
 	 * Test method for
-	 * {@link ca.footeware.es.contacts.controllers.ContactController#ContactController(ca.footeware.es.contacts.services.ContactService)}.
+	 * {@link ca.footeware.es.contacts.tests.controllers.ContactController#ContactController(ca.footeware.es.contacts.tests.services.ContactService)}.
 	 */
 	@Test
 	void testContactController() {
@@ -64,7 +64,7 @@ class ContactControllerIT {
 
 	/**
 	 * Test method for
-	 * {@link ca.footeware.es.contacts.controllers.ContactController#getContacts(org.springframework.ui.Model)}.
+	 * {@link ca.footeware.es.contacts.tests.controllers.ContactController#getContacts(org.springframework.ui.Model)}.
 	 * 
 	 * @throws Exception
 	 */
@@ -78,7 +78,7 @@ class ContactControllerIT {
 
 	/**
 	 * Test method for
-	 * {@link ca.footeware.es.contacts.controllers.ContactController#addContact(org.springframework.ui.Model)}.
+	 * {@link ca.footeware.es.contacts.tests.controllers.ContactController#addContact(org.springframework.ui.Model)}.
 	 */
 	@Test
 	void testAddContact() {
@@ -90,7 +90,7 @@ class ContactControllerIT {
 
 	/**
 	 * Test method for
-	 * {@link ca.footeware.es.contacts.controllers.ContactController#saveContact(ca.footeware.es.contacts.models.Contact, org.springframework.ui.Model)}.
+	 * {@link ca.footeware.es.contacts.tests.controllers.ContactController#saveContact(ca.footeware.es.contacts.tests.models.Contact, org.springframework.ui.Model)}.
 	 */
 	@Test
 	void testSaveContact() {
@@ -109,7 +109,7 @@ class ContactControllerIT {
 
 	/**
 	 * Test method for
-	 * {@link ca.footeware.es.contacts.controllers.ContactController#deleteContact(java.lang.String, org.springframework.ui.Model)}.
+	 * {@link ca.footeware.es.contacts.tests.controllers.ContactController#deleteContact(java.lang.String, org.springframework.ui.Model)}.
 	 */
 	@Test
 	void testDeleteContact() {
@@ -134,7 +134,7 @@ class ContactControllerIT {
 
 	/**
 	 * Test method for
-	 * {@link ca.footeware.es.contacts.controllers.ContactController#editContact(java.lang.String, org.springframework.ui.Model)}.
+	 * {@link ca.footeware.es.contacts.tests.controllers.ContactController#editContact(java.lang.String, org.springframework.ui.Model)}.
 	 */
 	@Test
 	void testEditContact() {
@@ -158,6 +158,17 @@ class ContactControllerIT {
 		document = Jsoup.parse(response.getBody());
 		Element h1 = document.selectFirst("body header h1");
 		assertEquals("Contact Editor", h1.text());
+
+		// invalid ID
+		url = "/contacts/1";
+		headers = new HttpHeaders();
+		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+		entity = new HttpEntity<>(headers);
+		response = template.exchange(url, HttpMethod.PUT, entity, String.class);
+		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+		document = Jsoup.parse(response.getBody());
+		String body = document.selectFirst("body").text();
+		assertTrue(body.contains("Contact not found."));
 	}
 
 }

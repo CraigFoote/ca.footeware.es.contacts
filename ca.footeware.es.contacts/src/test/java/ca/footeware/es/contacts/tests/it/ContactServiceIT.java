@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ca.footeware.es.contacts;
+package ca.footeware.es.contacts.tests.it;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -59,7 +59,7 @@ class ContactServiceIT {
 
 	/**
 	 * Test method for
-	 * {@link ca.footeware.es.contacts.services.ContactService#ContactService(ca.footeware.es.contacts.repositories.ContactRepository)}.
+	 * {@link ca.footeware.es.contacts.tests.services.ContactService#ContactService(ca.footeware.es.contacts.tests.repositories.ContactRepository)}.
 	 */
 	@Test
 	void testContactService() {
@@ -69,7 +69,7 @@ class ContactServiceIT {
 
 	/**
 	 * Test method for
-	 * {@link ca.footeware.es.contacts.services.ContactService#saveContact(ca.footeware.es.contacts.models.Contact)}.
+	 * {@link ca.footeware.es.contacts.tests.services.ContactService#saveContact(ca.footeware.es.contacts.tests.models.Contact)}.
 	 * 
 	 * @throws ContactException
 	 */
@@ -77,11 +77,18 @@ class ContactServiceIT {
 	void testSaveContact() throws ContactException {
 		Contact contact = service.saveContact(getContact());
 		assertNotSame(null, contact.getId(), "Saved contact should have non-null id.");
+		
+		// cannot have duplicate email address
+		try {
+			service.saveContact(getContact());
+		} catch (ContactException e) {
+			//pass
+		}
 	}
 
 	/**
 	 * Test method for
-	 * {@link ca.footeware.es.contacts.services.ContactService#getContacts()}.
+	 * {@link ca.footeware.es.contacts.tests.services.ContactService#getContacts()}.
 	 * 
 	 * @throws ContactException
 	 */
@@ -100,7 +107,7 @@ class ContactServiceIT {
 
 	/**
 	 * Test method for
-	 * {@link ca.footeware.es.contacts.services.ContactService#delete(java.lang.String)}.
+	 * {@link ca.footeware.es.contacts.tests.services.ContactService#delete(java.lang.String)}.
 	 * 
 	 * @throws ContactException
 	 */
@@ -115,7 +122,7 @@ class ContactServiceIT {
 
 	/**
 	 * Test method for
-	 * {@link ca.footeware.es.contacts.services.ContactService#getById(java.lang.String)}.
+	 * {@link ca.footeware.es.contacts.tests.services.ContactService#getById(java.lang.String)}.
 	 * 
 	 * @throws ContactException
 	 */

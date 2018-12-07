@@ -1,4 +1,4 @@
-package ca.footeware.es.contacts;
+package ca.footeware.es.contacts.tests;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
